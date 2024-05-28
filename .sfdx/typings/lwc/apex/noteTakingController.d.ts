@@ -7,3 +7,6 @@ declare module "@salesforce/apex/noteTakingController.getNotes" {
 declare module "@salesforce/apex/noteTakingController.updateNoteRecord" {
   export default function updateNoteRecord(param: {noteId: any, title: any, description: any}): Promise<any>;
 }
+declare module "@salesforce/apex/noteTakingController.deleteNoteRecord" {
+  export default function deleteNoteRecord(param: {noteId: any}): Promise<any>;
+}

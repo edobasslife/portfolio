@@ -2,7 +2,10 @@ import { LightningElement,wire } from 'lwc';
 import createNoteRecord from '@salesforce/apex/NoteTakingController.createNoteRecord'
 import getNotes from '@salesforce/apex/noteTakingController.getNotes';
 import updateNoteRecord from '@salesforce/apex/noteTakingController.updateNoteRecord';
+import deleteNoteRecord from '@salesforce/apex/noteTakingController.deleteNoteRecord';
+
 import {refreshApex} from '@salesforce/apex'
+import LightningConfirm from 'lightning/confirm'
 const DEFAULT_NOTE_FORM = {
   Name:"",
   Note_Description__c:""
@@ -132,4 +135,36 @@ get ModalName(){
   refresh(){
     return refreshApex(this.wireNoteResult)
   }
-}
+
+  deleteNoteHandler(event){
+    this.selectedRecordId = event.target.dataset.recordid
+    this.handleConfirm()
+  }
+    async handleConfirm(){
+    const result = await LightningConfirm.open({
+        message:"Are you sure you want to delete this note?",
+        variant:'hearderless',
+        label:'Delete Confirmation'
+      })
+      if(result){
+        this.deleteHandler()
+      } else{
+        this.selectedRecordId =null
+      }
+    }
+    deleteHandler( ){
+      deleteNoteRecord({noteId: this.selectedRecordId}).then(()=>{
+        this.showModal=false
+        this.selectedRecordId =null
+        this.showToastMsg("Note Deleted Succesfully!!", 'success')
+        this.refresh()
+  
+      }).catch(error=>{
+        console.error("error in deletion",error)
+        this.showToast(error.message.body, 'error')
+      })
+
+    }
+
+  }
+

@@ -1,4 +1,4 @@
-public with sharing class noteTakingController {
+public without sharing class noteTakingController {
     @AuraEnabled
   
     public static Boolean createNoteRecord(String title, String description){
@@ -31,6 +31,21 @@ public with sharing class noteTakingController {
 
             }
             return false;
+        } catch (Exception e) {
+            throw new AuraHandledException(e.getMessage());
+        }
+    }
+
+    @AuraEnabled
+    public static Boolean deleteNoteRecord(String noteId){
+        try {
+            if(!String.isBlank(noteId)){
+                My_Note__c noteRec = new My_Note__c(Id=noteId);
+                delete noteRec;
+                return true;
+            }
+            return false;
+            
         } catch (Exception e) {
             throw new AuraHandledException(e.getMessage());
         }
