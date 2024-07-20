@@ -1,5 +1,5 @@
 import { LightningElement,wire } from 'lwc';
-import createNoteRecord from '@salesforce/apex/NoteTakingController.createNoteRecord'
+import createNoteRecord from '@salesforce/apex/NoteTakingController.createNoteRecord' // this a comment
 import getNotes from '@salesforce/apex/noteTakingController.getNotes';
 import updateNoteRecord from '@salesforce/apex/noteTakingController.updateNoteRecord';
 import deleteNoteRecord from '@salesforce/apex/noteTakingController.deleteNoteRecord';

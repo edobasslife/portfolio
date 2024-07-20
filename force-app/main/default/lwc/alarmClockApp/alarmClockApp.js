@@ -87,9 +87,9 @@ optionhandler(event){
         this.merdiemSelected =value
     } else{}
 
-/*     console.log(" this.hourSelected", this.hourSelected)
+    console.log(" this.hourSelected", this.hourSelected)
     console.log(" this.minSelected",  this.minSelected)
-    console.log(" this.merdiemSelected", this.merdiemSelected) */
+    console.log(" this.merdiemSelected", this.merdiemSelected) 
 
 
 }
